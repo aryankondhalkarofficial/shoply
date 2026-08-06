@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import userRouter from "./routes/user.route.js";
+import productRouter from "./routes/product.route.js";
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
 
 export default app;
