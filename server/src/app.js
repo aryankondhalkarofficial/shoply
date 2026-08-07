@@ -10,6 +10,14 @@ import orderRouter from "./routes/order.route.js";
 import reviewRouter from "./routes/review.route.js";
 
 const app = express();
+const limiter = rateLimit({
+  windowMs: 1000 * 60 * 15,
+  limit: 100,
+  message: {
+    success: false,
+    message: "Too many requests, try again later",
+  },
+});
 
 app.use(helmet());
 app.use(
@@ -21,6 +29,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(limiter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
