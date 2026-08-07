@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
       maxlength: [50, "Name cannot exceed 50 characters"],
       trim: true,
     },
+
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -16,36 +17,38 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
+
     password: {
       type: String,
       required: [true, "Password is required"],
       minlength: [8, "Password should be at least 8 characters"],
       maxlength: [64, "Password cannot exceed 64 characters"],
     },
-    role: {
-      type: String,
-      enum: ["customer", "admin"],
-      default: "customer",
-    },
+
     address: {
       type: String,
       required: [true, "Address is required"],
       trim: true,
     },
+
     city: {
       type: String,
       required: [true, "City is required"],
       trim: true,
     },
+
     postalCode: {
       type: String,
       required: [true, "Postal code is required"],
+      trim: true,
     },
+
     state: {
       type: String,
       required: [true, "State is required"],
       trim: true,
     },
+
     country: {
       type: String,
       required: [true, "Country is required"],
