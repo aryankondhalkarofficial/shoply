@@ -42,39 +42,13 @@ export const getOrderById = async (req, res) => {
 
 export const createOrder = async (req, res) => {
   try {
-    const {
-      product,
-      name,
-      image,
-      quantity,
-      amount,
-      totalAmount,
-      address,
-      city,
-      postalCode,
-      state,
-      country,
-    } = req.body;
+    const { items, totalAmount, shippingAddress } = req.body;
 
     const order = await Order.create({
       user: req.user,
-      items: [
-        {
-          product,
-          name,
-          image,
-          quantity,
-          amount,
-        },
-      ],
+      items,
       totalAmount,
-      shippingAddress: {
-        address,
-        city,
-        postalCode,
-        state,
-        country,
-      },
+      shippingAddress,
       status: "Processing",
     });
 
