@@ -3,6 +3,11 @@ import {
   getAllProducts,
   getProductById,
 } from "../controllers/product.controller.js";
+import validate from "../middlewares/validate.middleware.js";
+import {
+  createProductSchema,
+  updateProductSchema,
+} from "../validations/product.validation.js";
 
 const router = express.Router();
 

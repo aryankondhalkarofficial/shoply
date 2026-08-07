@@ -5,13 +5,18 @@ import {
   updateCart,
 } from "../controllers/cart.controller.js";
 import auth from "../middlewares/auth.middleware.js";
+import validate from "../middlewares/validate.middleware.js";
+import {
+  addToCartSchema,
+  updateCartSchema,
+} from "../validations/cart.validation.js";
 
 const router = express.Router();
 
 router.use(auth);
 
 router.get("/", getCart);
-router.post("/", addToCart);
-router.patch("/", updateCart);
+router.post("/", validate(addToCartSchema), addToCart);
+router.patch("/", validate(updateCartSchema), updateCart);
 
 export default router;
