@@ -1,14 +1,12 @@
 import express from "express";
 import {
   getCart,
-  addToCart,
   updateCart,
   createCart,
 } from "../controllers/cart.controller.js";
 import auth from "../middlewares/auth.middleware.js";
 import validate from "../middlewares/validate.middleware.js";
 import {
-  addToCartSchema,
   createCartSchema,
   updateCartSchema,
 } from "../validations/cart.validation.js";
