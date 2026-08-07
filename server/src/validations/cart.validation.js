@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const addToCartSchema = z.object({
+export const createCartSchema = z.object({
   product: z.string().min(1, "Product is required"),
 
   quantity: z

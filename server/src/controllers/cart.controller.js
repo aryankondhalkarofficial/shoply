@@ -19,7 +19,7 @@ export const getCart = async (req, res) => {
   }
 };
 
-export const addToCart = async (req, res) => {
+export const createCart = async (req, res) => {
   try {
     const existingCart = await Cart.findOne({ user: req.user });
     if (existingCart) {

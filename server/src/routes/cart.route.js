@@ -3,11 +3,13 @@ import {
   getCart,
   addToCart,
   updateCart,
+  createCart,
 } from "../controllers/cart.controller.js";
 import auth from "../middlewares/auth.middleware.js";
 import validate from "../middlewares/validate.middleware.js";
 import {
   addToCartSchema,
+  createCartSchema,
   updateCartSchema,
 } from "../validations/cart.validation.js";
 
@@ -16,7 +18,7 @@ const router = express.Router();
 router.use(auth);
 
 router.get("/", getCart);
-router.post("/", validate(addToCartSchema), addToCart);
+router.post("/", validate(createCartSchema), createCart);
 router.patch("/", validate(updateCartSchema), updateCart);
 
 export default router;
