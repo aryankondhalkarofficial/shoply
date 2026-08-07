@@ -50,22 +50,52 @@ export const createCart = async (req, res) => {
 
 export const updateCart = async (req, res) => {
   try {
-    const cart = await Cart.findOneAndUpdate(
-      {
-        user: req.user,
-      },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      },
-    );
+    const { product, quantity } = req.body;
+
+    const cart = await Cart.findOne({
+      user: req.user,
+    });
+
     if (!cart) {
       return res.status(404).json({
         success: false,
         message: "No cart found",
       });
     }
+
+    const existingItemIndex = cart.items.findIndex(
+      (item) => item.product.toString() === product,
+    );
+
+    // Remove item
+    if (quantity === 0) {
+      if (existingItemIndex !== -1) {
+        cart.items.splice(existingItemIndex, 1);
+      }
+
+      await cart.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "Item removed from cart",
+        cart,
+      });
+    }
+
+    // Update existing item
+    if (existingItemIndex !== -1) {
+      cart.items[existingItemIndex].quantity = quantity;
+    }
+    // Add new item
+    else {
+      cart.items.push({
+        product,
+        quantity,
+      });
+    }
+
+    await cart.save();
+
     return res.status(200).json({
       success: true,
       message: "Cart updated",
