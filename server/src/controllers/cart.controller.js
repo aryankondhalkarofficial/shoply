@@ -3,13 +3,17 @@ import serverError from "../utils/server-error.js";
 
 export const getCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ user: req.user });
+    const cart = await Cart.findOne({ user: req.user }).populate(
+      "items.product",
+    );
+
     if (!cart) {
       return res.status(200).json({
         success: true,
         message: "Cart is empty",
       });
     }
+
     return res.status(200).json({
       success: true,
       cart,
@@ -22,13 +26,16 @@ export const getCart = async (req, res) => {
 export const createCart = async (req, res) => {
   try {
     const existingCart = await Cart.findOne({ user: req.user });
+
     if (existingCart) {
       return res.status(400).json({
         success: false,
         message: "Cart already exists",
       });
     }
+
     const { product, quantity } = req.body;
+
     const cart = await Cart.create({
       user: req.user,
       items: [
@@ -38,6 +45,9 @@ export const createCart = async (req, res) => {
         },
       ],
     });
+
+    await cart.populate("items.product");
+
     return res.status(201).json({
       success: true,
       message: "Cart created",
@@ -74,6 +84,7 @@ export const updateCart = async (req, res) => {
       }
 
       await cart.save();
+      await cart.populate("items.product");
 
       return res.status(200).json({
         success: true,
@@ -86,6 +97,7 @@ export const updateCart = async (req, res) => {
     if (existingItemIndex !== -1) {
       cart.items[existingItemIndex].quantity = quantity;
     }
+
     // Add new item
     else {
       cart.items.push({
@@ -95,6 +107,7 @@ export const updateCart = async (req, res) => {
     }
 
     await cart.save();
+    await cart.populate("items.product");
 
     return res.status(200).json({
       success: true,
