@@ -35,8 +35,6 @@ Shoply includes user authentication, product browsing with pagination and filter
   <img src="screenshots/orders.png" width="45%" alt="Orders"/>
 </p>
 
-![Orders](screenshots/orders.png)
-
 ## Tech Stack
 
 ### Frontend
