@@ -163,7 +163,7 @@ npm run dev
 ## Test Account
 
 ```text
-Email: test@test.com
+Email: test@shoply.com
 Password: Test1234
 ```
 
