@@ -23,19 +23,17 @@ Shoply includes user authentication, product browsing with pagination and filter
 
 ## Screenshots
 
-### Login
+## Screenshots
 
-![Login](screenshots/login.png)
+<p align="center">
+  <img src="screenshots/login.png" width="45%" alt="Login"/>
+  <img src="screenshots/home.png" width="45%" alt="Home"/>
+</p>
 
-### Home
-
-![Home](screenshots/home.png)
-
-### Shop
-
-![Shop](screenshots/shop.png)
-
-### Orders
+<p align="center">
+  <img src="screenshots/shop.png" width="45%" alt="Shop"/>
+  <img src="screenshots/orders.png" width="45%" alt="Orders"/>
+</p>
 
 ![Orders](screenshots/orders.png)
 
